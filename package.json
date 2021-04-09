@@ -1,0 +1,17 @@
+{
+  "name": "proyecto-calendario",
+  "version": "1.0.0",
+  "description": "Proyecto de Práctica de calendario",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "html",
+    "css",
+    "npm"
+  ],
+  "author": "Marco Palmieri",
+  "license": "MIT"
+}
