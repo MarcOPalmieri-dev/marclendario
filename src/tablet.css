@@ -1,0 +1,40 @@
+body{
+    height: auto;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 20px;
+    height: 100%;
+    width: 95%;
+}
+
+.goals{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.responsive{
+    grid-row: 2;
+}
+
+
+.main-content {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7,1fr);
+}
+
+.card {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100px;
+    position: relative;
+    width: 20%;
+    min-width: 120px;
+    margin: 20px 10px;
+}
+

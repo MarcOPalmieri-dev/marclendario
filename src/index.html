@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"  media="(max-width:1320px)" href="tablet.css">
     <link rel="javascript" href="index.js">
 </head>
 <body>
     <main class="container glassmorphism-effect padding-box">
-        <section class="glassmorphism-effect padding-box">
+        <section class="glassmorphism-effect padding-box responsive">
              <div class="title">
                 <p>Objetivos</p>
                 <p>Lo que quiero lograr</p>
@@ -43,17 +44,27 @@
                 </section>
             </section>
         </section>
-        <section class="glassmorphism-effect padding-box">
-            <section class="main-content padding-box">
+        <section class="main-container glassmorphism-effect padding-box">
+            <section class="padding-box">
             <div class="title">
                     <p>Planeador Semanal</p>
                     <p>Semana del 15 al 19 de marzo</p>
                     <!-- esto irá modificado x javascript -->
             </div>
-              <div>
+              <div class="main-content">
                 <div>
                     <p class="little-p">Lunes</p>
                     <!-- esto ira modificado por javascript. Se agregará un botón para añadir tareas -->
+                    <div class="card">
+                        <div class="glassmorphism-effect">
+                            <p>Ejercicio</p>
+                        </div>
+                        <div class="glassmorphism-effect">
+                            <p>7:00am</p>
+                            <p>Cardio</p>
+                                <!-- sera agregado por javascript -->
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="glassmorphism-effect">
                             <p>Ejercicio</p>
