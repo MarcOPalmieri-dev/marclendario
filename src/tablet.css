@@ -1,4 +1,4 @@
-body{
+ body{
     height: auto;
 }
 
@@ -23,18 +23,18 @@ body{
 
 .main-content {
     display: grid;
-    grid-gap: 30px;
+    grid-gap: 20px;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(7,1fr);
 }
 
-.card {
-    display: inline-grid;
+ .card {
+    display: inline-grid; 
     grid-template-columns: repeat(3, 1fr);
     height: 100px;
     position: relative;
     width: 20%;
     min-width: 120px;
     margin: 20px 10px;
-}
+} 
 
