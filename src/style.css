@@ -6,16 +6,13 @@
 }
 
 html{
-    font-size:62.5%
+    font-size:62.5%;
+    font-family: 'Nunito', sans-serif;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap');
-/* cambiar a link rel en el html */
 
 body {
     background: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-    display: grid;
-    font-family: 'Nunito', sans-serif;
+    display: grid;  
     height: 100vh;
     place-items: center;
 }
@@ -46,16 +43,19 @@ body {
     font-size: 2.8rem;
     font-weight: 600; 
     margin-bottom: 30px;
+    color: #b86eb1;
 }
 
 .title p:last-child {
     font-size: 1.6rem;
     margin-bottom: 30px;
+    color: #520855;
 }
 
 /* little paragraph styles */
 .little-p{
     font-size:1.3rem;
+    color: #520855;
 }
 
 /* Objetive goals styles */
