@@ -7,13 +7,9 @@ const month = (now.daysInMonth());
 let pixels = 0;
 let days = month * 2;
 let day_comlpleted = 0;
-
 let current_day = now.format('D');
-let next_day = (parseInt(now.format('D'))+1);
-
-let rest_days = current_day !=1?month - current_day: month;
-
-console.log(rest_days)
+// let next_day = (parseInt(now.format('D'))+1);
+let next_day = 50;
 buttonProgressBar.addEventListener("click",function(){
 
     if (current_day === next_day){
@@ -35,7 +31,7 @@ function incressPorcentage(){
         progress.style.width = pixels + "px";
         current_day++;
         day_comlpleted++;
-        progress.innerHTML = day_comlpleted + "/" + rest_days + " Días";
+        progress.innerHTML = day_comlpleted + "/" + month + " Días";
         // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
     }
 }
