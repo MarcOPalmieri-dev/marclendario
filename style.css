@@ -102,14 +102,14 @@ body {
 /* Porcentage bar styles */
 .progress-bar{
     background-color: #d8d8d8;
-    width: 100px;
+    width: 1px;
     border-radius: 30px;
 }
 
 #progress-done{
     background-color: orange;
     height: 30px;
-    width: 1%;
+    width: 0px;
     border-radius: 30px;
 }
 
@@ -119,6 +119,7 @@ button{
     border-radius: 60px;
     border: 0px;
     cursor: pointer;
+    outline: none;
     transition: all 500ms ease;
 }
 
