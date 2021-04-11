@@ -56,6 +56,7 @@ body {
 .little-p{
     font-size:1.3rem;
     color: #520855;
+    margin-bottom: 10px;
 }
 
 /* Objetive goals styles */
@@ -72,14 +73,14 @@ body {
     align-items: center;
     flex-direction:row;
     min-width: 100px;
-    max-width: 900px;
+    max-width: 1000px;
     background-color:#ffffff59;
     border-radius: 30px;
     margin-bottom: 20px;
 }
-.goals div {
-    align-items: center;
+.goals div:first-child {
     display: flex;
+    align-items: center;
     height: 40px;
     border-radius: 50%;
     justify-content: center;
@@ -87,13 +88,30 @@ body {
     margin-right: 10px;
 }
 
+.goals div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
 .goals img {
     width: 30px;
 }
 
+/* Porcentage bar styles */
+.progress-bar{
+    background-color: #d8d8d8;
+    width: 100px;
+    border-radius: 30px;
+}
+
+#progress-done{
+    background-color: orange;
+    height: 30px;
+    width: 1%;
+    border-radius: 30px;
+}
+
 /* Calendar syles */
-
-
 .main-content > div:nth-child(2) {
     display: grid;
     grid-gap: 20px;

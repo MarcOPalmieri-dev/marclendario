@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario</title>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"  media="(max-width:1320px)" href="tablet.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap">
-    <link rel="javascript" href="index.js">
 </head>
 <body>
     <main class="container glassmorphism-effect padding-box">
@@ -24,9 +24,15 @@
                     <div class="glassmorphism-effect">
                         <!-- molde -->
                         <img src="https://img.icons8.com/nolan/64/love-book.png" alt="libro"/>
+                        
                         <!-- agregar barra de progreso y boton para aumentarla cada vez que se cumpla el objetivo -->
                     </div>
-                    <p class="little-p"> Leer más</p>
+                    <div>
+                        <p class="little-p"> Leer más</p>
+                        <div class="progress-bar">
+                            <div id="progress-done"></div>
+                        </div>
+                    </div>
                 </section>
                 <section>
                     <div></div> 
@@ -51,21 +57,12 @@
                     <p>Planeador Semanal</p>
                     <p>Semana del 15 al 19 de marzo</p>
                     <!-- esto irá modificado x javascript -->
+                    
             </div>
               <div>
                 <div>
                     <p class="little-p">Lunes</p>
                     <!-- esto ira modificado por javascript. Se agregará un botón para añadir tareas -->
-                    <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
                     <div class="card">
                         <div class="glassmorphism-effect">
                             <p>Ejercicio</p>
@@ -158,6 +155,10 @@
                 </div> 
             
         </section>
+       
     </main>
+    
 </body>
+<script src="index.js"></script>
+
 </html>
