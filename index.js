@@ -3,11 +3,12 @@ const container = document.getElementsByClassName("progress-bar")[0];
 const progress = document.querySelector("#progress-done");
 
 let pixels = 0;
-
+let porcentage_number = 0;
 let current_day = 15;
 
 let next_day = 16;
 // este valor se obtiene x metodo de capturar dia
+
 
 buttonProgressBar.addEventListener("click",function(){
 
@@ -29,6 +30,7 @@ function removeProgressClick(){
 
 function incressPorcentage(){
     let days = 31 * 2;
+    
 // ejemplo
     container.style.width = days + "px";
     if(pixels === days){
@@ -38,10 +40,12 @@ function incressPorcentage(){
         pixels+=2;
         progress.style.width = pixels + "px";
         current_day++;
-        
+        porcentage_number++;
+        progress.innerHTML = porcentage_number + "%";
+
     }
 }
-
+//  agregar el porcentaje a la barra.
 
 // metodo de la barra de porcentaje:
 
