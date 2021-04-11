@@ -87,6 +87,10 @@ body {
     justify-content: center;
     width:40px;
     margin-right: 10px;
+    background-image: url("https://img.icons8.com/nolan/64/love-book.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 /* Porgress bar container */
