@@ -17,7 +17,7 @@
                 <p>Lo que quiero lograr</p>
              </div>
             <!-- estos divs seran agregados desde javascript -->
-            <section class="goals">
+            <section class="goals" onload="startObjetives()">
                 <!-- el contenido de los divs sera agregado por javascript -->
                 <section id="section">
                     <div id="img-container" class="glassmorphism-effect">
@@ -48,10 +48,10 @@
                 <section>
                     <div></div>
                 </section>
-                <button class="padding-box">
-                    <img src="mas.png" alt="Nuevo Objetivo" >
-                    </button>
             </section>
+            <button id="new_objetive" class="padding-box">
+                <img src="mas.png" alt="Nuevo Objetivo" >
+                </button>
         </section>
         <section class="main-content glassmorphism-effect padding-box">
             <!-- <section class="padding-box"> -->
@@ -162,6 +162,33 @@
         </section>
        
     </main>
+
+    <div id="objetive_form">
+        <h3>Nuevo Objetivo</h3>
+        <form>
+            <label for="title">Elige el título para el objetivo</label>
+            <input type="text" id="title" required>
+
+            <label for="icon">Elige el ícono del objetivo.</label>
+            <select name="icon" id="icon"  required>
+                <option value="read">Leer</option>
+                <option value="excercise">Hacer ejercicio</option>
+                <option value="study">Estudiar</option>
+                <option value="homework">Hacer tarea</option>
+                <option value="clean">Limpiar</option>
+                <option value="other">Otro</option>
+            </select>
+
+            <label for="time_to_complete">Elige el tiempo, en días, para completar el objetivo.</label>
+            <input type="number" name="time_to_complete" min="1" max="366"  required> 
+
+            <button id="save_objetive">Guardar</button>
+        </form>
+    </div>
+    <!-- <img src="https://img.icons8.com/nolan/64/housekeeping.png"/>
+    <img src="https://img.icons8.com/nolan/64/my-homework.png"/>
+    <img src="https://img.icons8.com/nolan/64/saving-book.png"/>
+    <img src="https://img.icons8.com/nolan/64/dumbbell.png"/> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
