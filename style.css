@@ -162,10 +162,23 @@ button img{
     box-shadow: 0px 0px 33px -4px #49064C;
 }
 
+#objetive_form div{
+    width: 80%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#objetive_form div img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
 
 #objetive_form h3{
-    font-size: 2.2rem;
-    font-weight: 700;
+    font-size: 2.4rem;
+    font-weight: bold;
     color: #49064c;
 }
 
@@ -184,6 +197,7 @@ button img{
 
 #objetive_form form input,select{
     padding: 5px 10px;
+    margin-bottom: 10px;
     line-height: 1.5em;
     color: #49064c;
     border: none;
