@@ -149,12 +149,14 @@ button img{
     padding: 10px;
     position:fixed;
     top: 25%;
-    left: calc(50% - 220px);
-    display:flex;
+    left: calc(50% - 160px);
+    display:none;
     flex-direction: column;
     justify-content:space-around;
     align-items: center;
-    width: 40%;
+    width: 100%;
+    min-width: 290px;
+    max-width: 500px;
     min-height: 300px;
     background: #fad0fc;
     border-radius: 10px;
@@ -163,6 +165,8 @@ button img{
 }
 
 #objetive_form div{
+    margin-top: 10px;
+    margin-bottom: 60px;
     width: 80%;
     display:flex;
     flex-direction: row;
@@ -182,20 +186,25 @@ button img{
     color: #49064c;
 }
 
-#objetive_form form{
+#objetive_form .form{
+    margin:0 auto;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: flex-start;
     height: 200px;
 }
 
-#objetive_form form label{
+#objetive_form .form label{
+    width: 80%;
     font-size: 1.2rem; 
     font-weight: 600;  
     color: #49064c;
 }
 
-#objetive_form form input,select{
+#objetive_form .form input,select{
+    width: 100%;
     padding: 5px 10px;
     margin-bottom: 10px;
     line-height: 1.5em;
@@ -206,17 +215,18 @@ button img{
     border-radius: 5px;
 }
 
-#objetive_form form select{
+#objetive_form .form select{
     width: 50%;
 }
 
-#objetive_form form input[type="number"]{
+#objetive_form .form input[type="number"]{
     width: 30%;
 }
 
 #save_objetive{
     align-self: center;
     margin-top: 10px;
+    margin-bottom: 20px;
     padding: 10px 0;
     width: 40%;
     background: #6730c5;

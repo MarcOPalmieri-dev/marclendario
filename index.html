@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/nolan/64/today.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"  media="(max-width:1320px)" href="tablet.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap">
@@ -17,7 +18,7 @@
                 <p>Lo que quiero lograr</p>
              </div>
             <!-- estos divs seran agregados desde javascript -->
-            <section class="goals" onload="startObjetives()">
+            <section class="goals" >
                 <!-- el contenido de los divs sera agregado por javascript -->
                 <section id="section">
                     <div id="img-container" class="glassmorphism-effect">
@@ -49,7 +50,7 @@
                     <div></div>
                 </section>
             </section>
-            <button id="new_objetive" class="padding-box">
+            <button id="new_objetive" class="padding-box" onclick="startObjetives()">
                 <img src="mas.png" alt="Nuevo Objetivo" >
                 </button>
         </section>
@@ -166,10 +167,10 @@
     <div id="objetive_form">
         <div>
             <h3>Nuevo Objetivo</h3>
-            <span><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
+            <span id="close_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
         </div>
-        
-        <form>
+
+        <div class="form">
             <label for="title">Elige el título para el objetivo</label>
             <input type="text" id="title" required>
 
@@ -184,10 +185,10 @@
             </select>
 
             <label for="time_to_complete">Elige el tiempo, en días, para completar el objetivo.</label>
-            <input type="number" name="time_to_complete" min="1" max="366"  required> 
+            <input type="number" id="time" name="time" min="1" max="366"  required> 
 
             <button id="save_objetive">Guardar</button>
-        </form>
+        </div>
     </div>
     <!-- <img src="https://img.icons8.com/nolan/64/housekeeping.png"/>
     <img src="https://img.icons8.com/nolan/64/my-homework.png"/>
