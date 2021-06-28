@@ -23,14 +23,14 @@ let day_comlpleted = 0;
 let current_day = now.format('D');
 let next_day = (parseInt(now.format('D'))+1);
 
-buttonProgressBar.addEventListener("click",function(){
+// buttonProgressBar.addEventListener("click",function(){
 
-    if (current_day === next_day){
-        swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
-    }else{
-        incressPorcentage()
-    }
-});
+//     if (current_day === next_day){
+//         swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
+//     }else{
+//         incressPorcentage()
+//     }
+// });
 
 
 function incressPorcentage(){
@@ -89,19 +89,26 @@ class Objetives{
         this.select_icon = select_icon;
         this.input_time = input_time;
         this.showObjetiveForm()
+        // this.print()
     // this.getObjetives() Trae los objetivos que ya estan creados. Metodo que recorre un array de objetos? 
     // this.new_objetive = getElement...   Traemos el boton para crear nuevos objetivos. Luego le agregamos el eventListener con el metodo correspondiente. Va a hacer push al array de objetos de arriba, y tambien se le va a agregar como atributo el metodo del progress bar. El
     }
 
+    // async print(){
+    //     let array = await this.showObjetiveForm()
+    //     console.log(array)
+    // }
     showObjetiveForm(){
-        this.newObjetive()
+        debugger
+        if(this.array_objetives.length === 0){
+            this.newObjetive()
+            
+        }else{
+            // esto está para traerlos de base de datos  
+            this.printObjetives()
+        }
     }
 
-
-    // addClickEvent(){
-        
-        
-    // }
 
     removeClickEvent(){
         this.close_button.removeEventListener('click',this.closeForm.bind(this));
@@ -113,20 +120,93 @@ class Objetives{
         this.objetive_form.style.display = "flex";
         this.close_button.addEventListener('click',this.closeForm.bind(this));
         this.save_objetive_button.addEventListener('click',()=>this.saveData());
+      
         // le ponemos display block a un formulario emergente. Luego obtenemos los datos del formulario. Y eso lo ponemos en un objeto (quizas sea de la clase objetivo, y le modificamos las propiedades. Una de esas propiedades debe ser el valor de pixels,current-day y esos, para que se guarden los valores y no se reinicie
         // y despues con el metodo getObjetives, recorremos el array y los imprimimos.
+        
     }
 
     closeForm(){
         objetive_form.style.display = "none"; 
+        input_title.value = "";
+        input_time.value = "";
     }
 
     saveData(){
         let title_data = this.input_title.value;
-        let select_icon = this.select_icon.value;
+        let select_icon = this.transformToUrl(parseInt(this.select_icon.value));
         let time_data = this.input_time.value;
 
-        console.log(title_data,select_icon,time_data)
+        // transformar el icon a url de imagen
+        this.create_push_Object(title_data,select_icon,time_data);
+            this.closeForm(),
+            swal("¡Perfecto!", "El objetivo se ha guardado con éxito!", "success")
+    }
+
+    transformToUrl(value){
+
+        switch(value){
+            case 1:
+                return "https://img.icons8.com/nolan/64/love-book.png"
+            
+            case 2:
+                return "https://img.icons8.com/nolan/64/dumbbell.png"
+
+            case 3:
+                return "https://img.icons8.com/nolan/64/saving-book.png"
+
+            case 4:
+                return "https://img.icons8.com/nolan/64/my-homework.png"
+
+            case 5:
+                return "https://img.icons8.com/nolan/64/housekeeping.png"
+            
+            case 6:
+                return "https://img.icons8.com/nolan/64/editing-icons-align-text-left.png"
+        }
+    }
+    
+    create_push_Object(title,icon,time){
+        let obj = {
+            title,
+            icon,
+            time,
+            // funcion (agrupar las varibles y la funcion de progress bar) que tome como parametro "time" para pasarselo a pixels. 
+            progress_bar:function(){
+                buttonProgressBar.addEventListener("click",function(){
+
+                    if (current_day === next_day){
+                        swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
+                    }else{
+                        incressPorcentage()
+                    }
+                });
+            }
+        }
+        this.array_objetives.push(obj);
+        this.printObjetives()
+    }
+
+    printObjetives(){
+        // for (let obj of this.array_objetives) {
+            // debugger
+            console.log(this.array_objetives)
+        //     // const section = document.querySelector(".goals")
+        //     // let obj_template = `
+        //     // <section id="section" class="section">
+        //     // <div id="img-container" class="glassmorphism-effect img-container">     
+        //     // <img src="${obj.icon}"/>
+        //     // </div>
+        //     // <div id="buttonProgressBar">
+        //     // <p class="little-p">${obj.title}</p>
+        //     // <div class="progress-bar">
+        //     // <div id="progress-done"></div>
+        //     // </div>
+        //     // </div> `
+            
+        //     // section.innerHTML = obj_template;
+            
+        // }
     }
     
 }
@@ -135,6 +215,7 @@ class Objetives{
 
 function startObjetives(){
     this.objetive = new Objetives();
-    console.log(this.objetive)
+    
 }
 
+// comprobar con el debugger si el condicional de la linea 102 accede al else a la segunda vez

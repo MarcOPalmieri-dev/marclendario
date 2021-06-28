@@ -67,7 +67,7 @@ body {
     width: 100%;
 }
 
-.goals section{
+.goals .section{
     padding: 1em;
     display: flex;
     align-items: center;
@@ -79,7 +79,7 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
 }
-.goals div:first-child {
+.goals .img-container {
     display: flex;
     align-items: center;
     height: 40px;
@@ -87,7 +87,6 @@ body {
     justify-content: center;
     width:40px;
     margin-right: 10px;
-    background-image: url("https://img.icons8.com/nolan/64/love-book.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
