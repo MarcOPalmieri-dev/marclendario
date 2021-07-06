@@ -129,6 +129,7 @@ button{
     cursor: pointer;
     outline: none;
     transition: all 500ms ease;
+    
 }
 
 button:hover{
