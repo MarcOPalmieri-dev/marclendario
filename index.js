@@ -1,66 +1,20 @@
-const buttonProgressBar = document.getElementById("buttonProgressBar");
-const container = document.getElementsByClassName("progress-bar")[0];
-const progress = document.querySelector("#progress-done");
-const img_container = document.getElementById("img-container");
-const goals_div = document.getElementsByClassName("goals")
-const goal_container = document.getElementById("section");
-const now = moment();
-const month_days = (now.daysInMonth());
-const name_of_month = now.format("MMMM");
-
 
 
 // Adding month to the front
-const month_container = document.getElementById("month");
-const month_text = document.createElement("p");
-month_text.innerHTML = name_of_month;
-month_container.append(month_text);
+// const name_of_month = now.format("MMMM");
+// const month_container = document.getElementById("month");
+// const month_text = document.createElement("p");
+// month_text.innerHTML = name_of_month;
+// month_container.append(month_text);
 
 // adding values to progress bar
-let pixels = 0;
-let days = month_days * 2;
-let day_comlpleted = 0;
-let current_day = now.format('D');
-let next_day = (parseInt(now.format('D'))+1);
-
-// buttonProgressBar.addEventListener("click",function(){
-
-//     if (current_day === next_day){
-//         swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
-//     }else{
-//         incressPorcentage()
-//     }
-// });
+// let pixels = 0;
+// let days = month_days * 2;
+// let day_comlpleted = 0;
+// let current_day = now.format('D');
+// let next_day = (parseInt(now.format('D'))+1);
 
 
-// function incressPorcentage(){
-    
-//     container.style.width = days + "px";
-//     if(pixels === days){
-//         swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
-//         img_container.style.backgroundImage = "url('tick.png')";
-//         goal_container.style.opacity = 0.5;
-        
-//     }else{
-//         pixels+=2;
-//         progress.style.width = pixels + "px";
-//         current_day++;
-//         day_comlpleted++;
-//         progress.innerHTML = day_comlpleted + "/" + month_days + " Días";
-//         // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
-//     }
-// }
-
-// crear metodo para crear los objetivos.
-// 1 idea: el div contenedor cambie si el mes cambia, eliminando todos los objetivos.
-// 2 idea: preguntar cuanto durara el objetivo, y modificar el (month_days) del metodo incressPorcentage
-
-// 3 idea: se le aplica una duracion al objetivo, y si ese tiempo se pasa, que se borre.
-// function change_of_month{
-//     if(first_day){
-
-//     }
-// }
 
 // Metodo para las fechas:
 
@@ -83,7 +37,7 @@ const select_icon = document.getElementById("icon");
 const input_time = document.getElementById("time");
 
 // array to save objetives
-const array_objetives = [];
+let array_objetives = [];
 
 
 
@@ -118,27 +72,79 @@ function transformToUrl(value){
 }
 
 
+const buttonProgressBar = document.getElementById("buttonProgressBar");
+
+const progress = document.querySelector("#progress-done");
+const img_container = document.getElementById("img-container");
+const goals_div = document.getElementsByClassName("goals")
+const goal_container = document.getElementById("section");
+const now = moment();
+const month_days = (now.daysInMonth());
+
+
+// let pixels = 0;
+// let days = month_days * 2;
+// let day_comlpleted = 0;
+// let current_day = now.format('D');
+// console.log(current_day);
+let next_day = (parseInt(now.format('D'))+1);
+
+function progressBar(current_day,days,pixels,current_day,day_completed){
+    console.log("click")
+    if (current_day === next_day){
+        swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
+    }else{
+        incressPorcentage(days,pixels,current_day,day_completed)
+    }
+};
+
+
+function incressPorcentage(days,pixels,current_day,day_completed){
+    const container = document.getElementsByClassName("progress-bar");
+    container.style.width = days + "px";
+    if(pixels === days){
+        swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
+        img_container.style.backgroundImage = "url('tick.png')";
+        goal_container.style.opacity = 0.5;
+        
+    }else{
+        pixels+=2;
+        progress.style.width = pixels + "px";
+        current_day++;
+        day_completed++;
+        progress.innerHTML = day_comlpleted + "/" + month_days + " Días";
+        // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
+    }
+}
+
+// crear metodo para crear los objetivos.
+// 1 idea: el div contenedor cambie si el mes cambia, eliminando todos los objetivos.
+// 2 idea: preguntar cuanto durara el objetivo, y modificar el (month_days) del metodo incressPorcentage
+
+// 3 idea: se le aplica una duracion al objetivo, y si ese tiempo se pasa, que se borre.
+// function change_of_month{
+//     if(first_day){
+
+//     }
+// }
+
 function createPushObject(title,icon,time){
-    
     let obj = {
         title,
         icon,
         time,
+        current_day:now.format('D'),
+        day_completed:0,
+        pixels: 0,
+        
         // funcion (agrupar las varibles y la funcion de progress bar) que tome como parametro "time" para pasarselo a pixels. 
-        // progress_bar:function(){
-        //     buttonProgressBar.addEventListener("click",function(){
-
-        //         if (current_day === next_day){
-        //             swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
-        //         }else{
-        //             incressPorcentage()
-        //         }
-        //     });
-        // }
+        // progress_bar: buttonProgressBar.addEventListener("click",progressBar(this.current_day,this.time,this.pixels,this.current_day,this.day_completed))
+        
     }
     
     array_objetives.push(obj);
-    newObjetive(array_objetives)
+    localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
+    printNewObjetives(array_objetives)
 }
 
 
@@ -154,44 +160,86 @@ function saveData(){
     
 }
 
+let obj_template;
+const section = document.querySelector(".goals")
+let objetive;
 
-
-
-function printObjetives(array){
-    const section = document.querySelector(".goals")
-
+function printNewObjetives(array){
     let obj = array[array.length - 1]
-//   print only the new object. If I had used a for of, it would have printed the whole array again. 
-    let obj_template = `
-            <section id="section" class="section">
+//   print only the new object. If I had used a "for of", it would have printed the whole array again. 
+    obj_template = `
+            <section id="section${array.length}" class="section">
             <div id="img-container" class="glassmorphism-effect img-container">     
             <img src="${obj.icon}"/>
             </div>
-            <div id="buttonProgressBar">
+            <div id="buttonProgressBar${array.length}">
             <p class="little-p">${obj.title}</p>
             <div class="progress-bar">
-            <div id="progress-done"></div>
+            <div id="progress-done${array.length}" class="progress-done"></div>
             </div>
             </div> `
 
-    const objetive = document.createElement('div')
+    objetive = document.createElement('div')
     objetive.innerHTML = obj_template;
     section.appendChild(objetive)
 }
 
-function newObjetive(array=0){
+
+function printObjetivesLS(array){
+    // const section = document.querySelector(".goals")
+    
+    for (const obj of array) {
+        
+        obj_template = `
+                <section id="section${array.length}" class="section">
+                <div id="img-container" class="glassmorphism-effect img-container">     
+                <img src="${obj.icon}"/>
+                </div>
+                <div id="buttonProgressBar${array.length}">
+                <p class="little-p">${obj.title}</p>
+                <div class="progress-bar">
+                <div id="progress-done${array.length}" class="progress-done"></div>
+                </div>
+                </div> `
+                objetive = document.createElement('div')
+                objetive.innerHTML = obj_template;
+                section.appendChild(objetive)
+    }
+
+}
+
+
+// function newObjetive(array=0){
+//     objetive_form.style.display = "flex";
+//     close_button.addEventListener('click',() =>closeForm());
+//     if(array_objetives.length === 0){
+        
+//         save_objetive_button.addEventListener('click',()=>saveData())
+//     }else{
+//         printNewObjetives(array)
+//         closeForm()
+//     }
+   
+// }
+
+function newObjetive(){
     objetive_form.style.display = "flex";
     close_button.addEventListener('click',() =>closeForm());
-    if(array_objetives.length === 0){
-        
-        save_objetive_button.addEventListener('click',()=>saveData())
-    }else{
-        console.log(array)
-        printObjetives(array)
-        closeForm()
-    }
-   
+    save_objetive_button.addEventListener('click',()=>saveData())
 }
 
 new_objetive_button.addEventListener("click",()=>newObjetive())
 
+
+
+
+function getObjetivesLS(){
+    if(localStorage.getItem('array_objetives')){
+        let array = JSON.parse(localStorage.getItem('array_objetives'))
+        array_objetives = array
+        printObjetivesLS(array_objetives)
+    }
+
+}
+
+getObjetivesLS()
