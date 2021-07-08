@@ -144,7 +144,7 @@ function createPushObject(title,icon,time){
     
     array_objetives.push(obj);
     localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
-    printNewObjetives(array_objetives)
+    
 }
 
 
@@ -155,19 +155,20 @@ function saveData(){
     let time_data = input_time.value;
     closeForm()
     createPushObject(title_data,icon,time_data);
-    
+    // printNewObjetives(array_objetives)
+    // title_data = 0;
+    // icon = 0;
+    // time_data = 0;
     swal("¡Perfecto!", "El objetivo se ha guardado con éxito!", "success")
-    
 }
 
-let obj_template;
-const section = document.querySelector(".goals")
-let objetive;
 
 function printNewObjetives(array){
+
+    const section = document.querySelector(".goals")
     let obj = array[array.length - 1]
 //   print only the new object. If I had used a "for of", it would have printed the whole array again. 
-    obj_template = `
+    let obj_template = `
             <section id="section${array.length}" class="section">
             <div id="img-container" class="glassmorphism-effect img-container">     
             <img src="${obj.icon}"/>
@@ -179,18 +180,18 @@ function printNewObjetives(array){
             </div>
             </div> `
 
-    objetive = document.createElement('div')
+    const objetive = document.createElement('div')
     objetive.innerHTML = obj_template;
     section.appendChild(objetive)
 }
 
 
 function printObjetivesLS(array){
-    // const section = document.querySelector(".goals")
+    const section = document.querySelector(".goals")
     
     for (const obj of array) {
         
-        obj_template = `
+        let obj_template = `
                 <section id="section${array.length}" class="section">
                 <div id="img-container" class="glassmorphism-effect img-container">     
                 <img src="${obj.icon}"/>
@@ -201,7 +202,7 @@ function printObjetivesLS(array){
                 <div id="progress-done${array.length}" class="progress-done"></div>
                 </div>
                 </div> `
-                objetive = document.createElement('div')
+                const objetive = document.createElement('div')
                 objetive.innerHTML = obj_template;
                 section.appendChild(objetive)
     }
@@ -209,24 +210,27 @@ function printObjetivesLS(array){
 }
 
 
-// function newObjetive(array=0){
-//     objetive_form.style.display = "flex";
-//     close_button.addEventListener('click',() =>closeForm());
-//     if(array_objetives.length === 0){
-        
-//         save_objetive_button.addEventListener('click',()=>saveData())
-//     }else{
-//         printNewObjetives(array)
-//         closeForm()
-//     }
-   
-// }
-
-function newObjetive(){
+function newObjetive(array=0){
     objetive_form.style.display = "flex";
     close_button.addEventListener('click',() =>closeForm());
-    save_objetive_button.addEventListener('click',()=>saveData())
+    if(array_objetives.length === 0){
+        
+        save_objetive_button.addEventListener('click',()=>{
+            saveData()
+            printNewObjetives(array_objetives)
+        })
+    }else{
+        printNewObjetives(array)
+        closeForm()
+    }
+   
 }
+
+// function newObjetive(){
+//     objetive_form.style.display = "flex";
+//     close_button.addEventListener('click',() =>closeForm());
+//     save_objetive_button.addEventListener('click',()=>saveData())
+// }
 
 new_objetive_button.addEventListener("click",()=>newObjetive())
 
@@ -235,9 +239,9 @@ new_objetive_button.addEventListener("click",()=>newObjetive())
 
 function getObjetivesLS(){
     if(localStorage.getItem('array_objetives')){
-        let array = JSON.parse(localStorage.getItem('array_objetives'))
-        array_objetives = array
-        printObjetivesLS(array_objetives)
+        let lsArray = JSON.parse(localStorage.getItem('array_objetives'))
+        array_objetives = lsArray
+        printObjetivesLS(lsArray)
     }
 
 }
