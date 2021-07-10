@@ -164,32 +164,35 @@
        
     </main>
 
-    <div id="objetive_form">
-        <div>
-            <h3>Nuevo Objetivo</h3>
-            <span id="close_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
+    <section class="popup_container">
+        <div id="objetive_form">
+            <div>
+                <h3>Nuevo Objetivo</h3>
+                <span id="close_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
+            </div>
+    
+            <div class="form">
+                <label for="title">Elige el título para el objetivo</label>
+                <input type="text" id="title" required>
+    
+                <label for="icon">Elige el ícono del objetivo.</label>
+                <select name="icon" id="icon" required>
+                    <option value="1">Leer</option>
+                    <option value="2">Hacer ejercicio</option>
+                    <option value="3">Estudiar</option>
+                    <option value="4">Hacer tarea</option>
+                    <option value="5">Limpiar</option>
+                    <option value="6">Otro</option>
+                </select>
+    
+                <label for="time_to_complete">Elige el tiempo, en días, para completar el objetivo.</label>
+                <input type="number" id="time" name="time" min="1" max="366"  required> 
+    
+                <button id="save_objetive">Guardar</button>
+            </div>
         </div>
-
-        <div class="form">
-            <label for="title">Elige el título para el objetivo</label>
-            <input type="text" id="title" required>
-
-            <label for="icon">Elige el ícono del objetivo.</label>
-            <select name="icon" id="icon" required>
-                <option value="1">Leer</option>
-                <option value="2">Hacer ejercicio</option>
-                <option value="3">Estudiar</option>
-                <option value="4">Hacer tarea</option>
-                <option value="5">Limpiar</option>
-                <option value="6">Otro</option>
-            </select>
-
-            <label for="time_to_complete">Elige el tiempo, en días, para completar el objetivo.</label>
-            <input type="number" id="time" name="time" min="1" max="366"  required> 
-
-            <button id="save_objetive">Guardar</button>
-        </div>
-    </div>
+    </section>
+  
     <!-- <img src="https://img.icons8.com/nolan/64/housekeeping.png"/>
     <img src="https://img.icons8.com/nolan/64/my-homework.png"/>
     <img src="https://img.icons8.com/nolan/64/saving-book.png"/>

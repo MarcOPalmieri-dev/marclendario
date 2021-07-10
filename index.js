@@ -27,7 +27,7 @@
 const new_objetive_button = document.getElementById("new_objetives")
 
 // form ids
-const objetive_form = document.getElementById("objetive_form");
+const objetive_form_container = document.getElementsByClassName("popup_container")[0];
 const close_form = document.getElementById("close_button");
 const save_objetive_button = document.getElementById("save_objetive");
 
@@ -42,7 +42,7 @@ let array_objetives = [];
 
 
 function closeForm(){
-    objetive_form.style.display = "none"; 
+    objetive_form_container.style.display = "none"; 
     input_title.value = "";
     input_time.value = "";
 }
@@ -144,6 +144,11 @@ function createPushObject(title,icon,time){
     
     array_objetives.push(obj);
     localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
+    swal({title: "¡Perfecto!",
+    text: "El objetivo se ha guardado con éxito!",
+    icon: "success",
+    buttons: false})
+    setTimeout(()=>location.reload(),2000)
     
 }
 
@@ -153,37 +158,38 @@ function saveData(){
     let icon = transformToUrl(parseInt(select_icon.value));
     // transform icon to image url
     let time_data = input_time.value;
-    closeForm()
-    createPushObject(title_data,icon,time_data);
-    // printNewObjetives(array_objetives)
-    // title_data = 0;
-    // icon = 0;
-    // time_data = 0;
-    swal("¡Perfecto!", "El objetivo se ha guardado con éxito!", "success")
+    if(title_data && time_data){
+        closeForm()
+        createPushObject(title_data,icon,time_data);
+    }else{
+        swal("Vaya...", "Debes completar todos los campos. Intentalo de nuevo.", "warning")
+    }
+    
+    
 }
 
 
-function printNewObjetives(array){
+// function printNewObjetives(array){
 
-    const section = document.querySelector(".goals")
-    let obj = array[array.length - 1]
-//   print only the new object. If I had used a "for of", it would have printed the whole array again. 
-    let obj_template = `
-            <section id="section${array.length}" class="section">
-            <div id="img-container" class="glassmorphism-effect img-container">     
-            <img src="${obj.icon}"/>
-            </div>
-            <div id="buttonProgressBar${array.length}">
-            <p class="little-p">${obj.title}</p>
-            <div class="progress-bar">
-            <div id="progress-done${array.length}" class="progress-done"></div>
-            </div>
-            </div> `
+//     const section = document.querySelector(".goals")
+//     let obj = array[array.length - 1]
+// //   print only the new object. If I had used a "for of", it would have printed the whole array again. 
+//     let obj_template = `
+//             <section id="section${array.length}" class="section">
+//             <div id="img-container" class="glassmorphism-effect img-container">     
+//             <img src="${obj.icon}"/>
+//             </div>
+//             <div id="buttonProgressBar${array.length}">
+//             <p class="little-p">${obj.title}</p>
+//             <div class="progress-bar">
+//             <div id="progress-done${array.length}" class="progress-done"></div>
+//             </div>
+//             </div> `
 
-    const objetive = document.createElement('div')
-    objetive.innerHTML = obj_template;
-    section.appendChild(objetive)
-}
+//     const objetive = document.createElement('div')
+//     objetive.innerHTML = obj_template;
+//     section.appendChild(objetive)
+// }
 
 
 function printObjetivesLS(array){
@@ -210,27 +216,26 @@ function printObjetivesLS(array){
 }
 
 
-function newObjetive(array=0){
-    objetive_form.style.display = "flex";
-    close_button.addEventListener('click',() =>closeForm());
-    if(array_objetives.length === 0){
-        
-        save_objetive_button.addEventListener('click',()=>{
-            saveData()
-            printNewObjetives(array_objetives)
-        })
-    }else{
-        printNewObjetives(array)
-        closeForm()
-    }
-   
-}
-
-// function newObjetive(){
-//     objetive_form.style.display = "flex";
+// function newObjetive(array=0){
+//     console.log(array)
+//     objetive_form_container.style.display = "grid";
 //     close_button.addEventListener('click',() =>closeForm());
-//     save_objetive_button.addEventListener('click',()=>saveData())
+//     if(array.length === 0){
+        
+//         save_objetive_button.addEventListener('click',()=>saveData())
+//     }else{
+
+//         printNewObjetives(array)
+//         closeForm()
+//     }
+   
 // }
+
+function newObjetive(){
+    objetive_form_container.style.display = "grid";
+    close_button.addEventListener('click',() =>closeForm());
+    save_objetive_button.addEventListener('click',()=>saveData())
+}
 
 new_objetive_button.addEventListener("click",()=>newObjetive())
 
@@ -239,11 +244,16 @@ new_objetive_button.addEventListener("click",()=>newObjetive())
 
 function getObjetivesLS(){
     if(localStorage.getItem('array_objetives')){
-        let lsArray = JSON.parse(localStorage.getItem('array_objetives'))
-        array_objetives = lsArray
-        printObjetivesLS(lsArray)
+        let array = JSON.parse(localStorage.getItem('array_objetives'))
+        array_objetives = array;
+        printObjetivesLS(array)
     }
-
 }
 
+
 getObjetivesLS()
+
+
+// array_objetives me come los huveos desde abajooooo
+
+
