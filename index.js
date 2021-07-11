@@ -159,8 +159,12 @@ function saveData(){
     // transform icon to image url
     let time_data = input_time.value;
     if(title_data && time_data){
-        closeForm()
-        createPushObject(title_data,icon,time_data);
+        if(!title_data.includes('<') && !title_data.includes('>')){
+            closeForm()
+            createPushObject(title_data,icon,time_data);
+        }else{
+            swal("Opss...", "No utilices el símbolo < ni >.", "warning")
+        }
     }else{
         swal("Vaya...", "Debes completar todos los campos. Intentalo de nuevo.", "warning")
     }
