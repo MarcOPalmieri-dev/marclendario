@@ -78,7 +78,7 @@ function transformToUrl(value){
 // const img_container = document.getElementById("img-container");
 // const goals_div = document.getElementsByClassName("goals")
 // const goal_container = document.getElementById("section");
-const now = moment();
+
 // const month_days = (now.daysInMonth());
 
 
@@ -100,25 +100,30 @@ const now = moment();
 //     }
 // }
 
+const now = moment();
 
-function progressBar(obj,days,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
-    progress_container.style.width = days * 3 + "px";
-    if(day_completed == days){
-        
-        swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
-        img_container.src = "tick.png"
-        obj.icon = 'tick.png'
-        goal_container.style.opacity = 0.5;
-        
-    }else{
-        pixels+=3;
+
+function progressBar(obj,time,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
+    
+    progress_container.style.width = time * 5 + "px";
+    
+        pixels+=5;
         progress_done.style.width = pixels + "px";
         day_completed++;
-        progress_done.innerHTML = day_completed + "/" + days + " Días";
+        progress_done.innerHTML = day_completed + "/" + time + " Días";
         obj.day_completed = day_completed;
         obj.pixels = pixels;
-        // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
-    }
+
+        if(day_completed == time){
+        
+            swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
+            img_container.src = "tick.png"
+            obj.icon = 'tick.png'
+            goal_container.style.opacity = 0.5;
+            obj.finished = true;
+        }
+
+    // with obj argument, can modify values and save it in localStorage
     localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
 };
 
@@ -132,7 +137,8 @@ function createPushObject(title,icon,time){
         icon,
         time,
         day_completed:0,
-        pixels: 0,   
+        pixels: 0, 
+        finished:false  
     }
     
     array_objetives.push(obj);
@@ -225,9 +231,23 @@ function addProgressBar(){
         let progress_done = document.getElementById("progress-done"+i);
         let img_container = document.getElementById("img-container"+i);
         let goal_container = document.getElementById("section"+i);
-        button.addEventListener('click',function(){
-            progressBar(obj,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
-        })
+
+            progress_container.style.width = obj.time * 5 + "px";
+            progress_done.style.width = obj.pixels + "px";
+            progress_done.innerHTML = obj.day_completed + "/" + obj.time + " Días";
+
+            if(obj.finished){
+                goal_container.style.opacity = 0.5;
+                progress_container.style.display = "none";
+            }
+
+            
+            button.addEventListener('click',function(){
+                
+                progressBar(obj,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
+            })
+
+
         i++
     }
 }
