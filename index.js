@@ -121,7 +121,7 @@ function progressBar(obj,time,pixels,day_completed,progress_done,img_container,g
             obj.icon = 'tick.png'
             goal_container.style.opacity = 0.5;
             obj.finished = true;
-            setTimeout(()=>location.reload(),2000)
+            setTimeout(()=>location.reload(),3000)
         }
 
     // with obj argument, can modify values and save it in localStorage
