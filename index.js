@@ -121,6 +121,7 @@ function progressBar(obj,time,pixels,day_completed,progress_done,img_container,g
             obj.icon = 'tick.png'
             goal_container.style.opacity = 0.5;
             obj.finished = true;
+            setTimeout(()=>location.reload(),2000)
         }
 
     // with obj argument, can modify values and save it in localStorage
@@ -171,28 +172,6 @@ function saveData(){
     
 }
 
-
-// function printNewObjetives(array){
-
-//     const section = document.querySelector(".goals")
-//     let obj = array[array.length - 1]
-// //   print only the new object. If I had used a "for of", it would have printed the whole array again. 
-//     let obj_template = `
-//             <section id="section${array.length}" class="section">
-//             <div id="img-container" class="glassmorphism-effect img-container">     
-//             <img src="${obj.icon}"/>
-//             </div>
-//             <div id="buttonProgressBar${array.length}">
-//             <p class="little-p">${obj.title}</p>
-//             <div class="progress-bar">
-//             <div id="progress-done${array.length}" class="progress-done"></div>
-//             </div>
-//             </div> `
-
-//     const objetive = document.createElement('div')
-//     objetive.innerHTML = obj_template;
-//     section.appendChild(objetive)
-// }
 
 
 function printObjetivesLS(array){
