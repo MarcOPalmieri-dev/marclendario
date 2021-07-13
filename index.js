@@ -87,35 +87,7 @@ const now = moment();
 // let day_comlpleted = 0;
 // let current_day = now.format('D');
 // console.log(current_day);
-let next_day = (parseInt(now.format('D'))+1);
 
-function progressBar(current_day,days,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
-    console.log("click")
-    if (current_day === next_day){
-        swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
-    }else{
-        incressPorcentage(days,pixels,current_day,day_completed,progress_done,img_container,goal_container,progress_container)
-    }
-};
-
-
-function incressPorcentage(days,pixels,current_day,day_completed,progress_done,img_container,goal_container,progress_container){
-    // const container = document.getElementsByClassName("progress-bar");
-    progress_container.style.width = days + "px";
-    if(pixels === days){
-        swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
-        img_container.style.backgroundImage = "url('tick.png')";
-        goal_container.style.opacity = 0.5;
-        
-    }else{
-        pixels+=2;
-        progress_done.style.width = pixels + "px";
-        current_day++;
-        day_completed++;
-        progress_done.innerHTML = day_completed + "/" + days + " Días";
-        // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
-    }
-}
 
 // crear metodo para crear los objetivos.
 // 1 idea: el div contenedor cambie si el mes cambia, eliminando todos los objetivos.
@@ -127,6 +99,40 @@ function incressPorcentage(days,pixels,current_day,day_completed,progress_done,i
 
 //     }
 // }
+let next_day = (parseInt(now.format('D'))+1);
+
+function progressBar(obj,current_day,days,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
+    // if (current_day === next_day){
+    //     swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
+    // }else{
+        incressPorcentage(obj,days,pixels,current_day,day_completed,progress_done,img_container,goal_container,progress_container)
+    // }
+};
+
+
+function incressPorcentage(obj,days,pixels,current_day,day_completed,progress_done,img_container,goal_container,progress_container){
+    // const container = document.getElementsByClassName("progress-bar");
+    progress_container.style.width = days * 3 + "px";
+    if(day_completed == days){
+        
+        swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
+        img_container.style.backgroundImage = "url('tick.png')";
+        goal_container.style.opacity = 0.5;
+        
+    }else{
+        pixels+=3;
+        progress_done.style.width = pixels + "px";
+        current_day++;
+        day_completed++;
+        progress_done.innerHTML = day_completed + "/" + days + " Días";
+        // if(current_day )
+        // // obj.current_day = current_day;
+        obj.day_completed = day_completed;
+        obj.pixels = pixels;
+        // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
+    }
+    
+}
 
 
 function createPushObject(title,icon,time){
@@ -229,10 +235,8 @@ function addProgressBar(){
         let progress_done = document.getElementById("progress-done"+i);
         let img_container = document.getElementById("img-container"+i);
         let goal_container = document.getElementById("section"+i);
-
         button.addEventListener('click',function(){
-            console.log(obj.current_day)
-            progressBar(obj.current_day,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
+            progressBar(obj,obj.current_day,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
         })
         i++
     }
