@@ -72,14 +72,14 @@ function transformToUrl(value){
 }
 
 
-const buttonProgressBar = document.getElementById("buttonProgressBar");
+// const buttonProgressBar = document.getElementById("buttonProgressBar");
 
-const progress = document.querySelector("#progress-done");
-const img_container = document.getElementById("img-container");
-const goals_div = document.getElementsByClassName("goals")
-const goal_container = document.getElementById("section");
+// const progress = document.querySelector("#progress-done");
+// const img_container = document.getElementById("img-container");
+// const goals_div = document.getElementsByClassName("goals")
+// const goal_container = document.getElementById("section");
 const now = moment();
-const month_days = (now.daysInMonth());
+// const month_days = (now.daysInMonth());
 
 
 // let pixels = 0;
@@ -89,19 +89,19 @@ const month_days = (now.daysInMonth());
 // console.log(current_day);
 let next_day = (parseInt(now.format('D'))+1);
 
-function progressBar(current_day,days,pixels,current_day,day_completed){
+function progressBar(current_day,days,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
     console.log("click")
     if (current_day === next_day){
         swal("¡Suficiente por hoy!", "Vuelve mañana para cumplir tu objetivo nuevamente", "warning")
     }else{
-        incressPorcentage(days,pixels,current_day,day_completed)
+        incressPorcentage(days,pixels,current_day,day_completed,progress_done,img_container,goal_container,progress_container)
     }
 };
 
 
-function incressPorcentage(days,pixels,current_day,day_completed){
-    const container = document.getElementsByClassName("progress-bar");
-    container.style.width = days + "px";
+function incressPorcentage(days,pixels,current_day,day_completed,progress_done,img_container,goal_container,progress_container){
+    // const container = document.getElementsByClassName("progress-bar");
+    progress_container.style.width = days + "px";
     if(pixels === days){
         swal("¡Felicidades!", "Lograste cumplir con tu objetivo!", "success")
         img_container.style.backgroundImage = "url('tick.png')";
@@ -109,10 +109,10 @@ function incressPorcentage(days,pixels,current_day,day_completed){
         
     }else{
         pixels+=2;
-        progress.style.width = pixels + "px";
+        progress_done.style.width = pixels + "px";
         current_day++;
         day_completed++;
-        progress.innerHTML = day_comlpleted + "/" + month_days + " Días";
+        progress_done.innerHTML = day_completed + "/" + days + " Días";
         // if = current day = 1 : rest_days == only month (30 / 31); but else, rest_days == days left to finish the month
     }
 }
@@ -128,6 +128,7 @@ function incressPorcentage(days,pixels,current_day,day_completed){
 //     }
 // }
 
+
 function createPushObject(title,icon,time){
     let obj = {
         title,
@@ -135,11 +136,7 @@ function createPushObject(title,icon,time){
         time,
         current_day:now.format('D'),
         day_completed:0,
-        pixels: 0,
-        
-        // funcion (agrupar las varibles y la funcion de progress bar) que tome como parametro "time" para pasarselo a pixels. 
-        // progress_bar: buttonProgressBar.addEventListener("click",progressBar(this.current_day,this.time,this.pixels,this.current_day,this.day_completed))
-        
+        pixels: 0,   
     }
     
     array_objetives.push(obj);
@@ -198,25 +195,47 @@ function saveData(){
 
 function printObjetivesLS(array){
     const section = document.querySelector(".goals")
-    
-    for (const obj of array) {
-        
+    let i = 0
+    for (let obj of array) {
+
         let obj_template = `
-                <section id="section${array.length}" class="section">
-                <div id="img-container" class="glassmorphism-effect img-container">     
+                <section id="section${i}" class="section">
+                <div id="img-container${i}" class="glassmorphism-effect img-container">     
                 <img src="${obj.icon}"/>
                 </div>
-                <div id="buttonProgressBar${array.length}">
+                <div id="buttonProgressBar${i}">
                 <p class="little-p">${obj.title}</p>
                 <div class="progress-bar">
-                <div id="progress-done${array.length}" class="progress-done"></div>
+                <div id="progress-done${i}" class="progress-done"></div>
                 </div>
                 </div> `
+
                 const objetive = document.createElement('div')
                 objetive.innerHTML = obj_template;
-                section.appendChild(objetive)
-    }
+                section.append(objetive)
+                i++
+        }
 
+}
+
+
+function addProgressBar(){
+
+    let i = 0
+    for (let obj of array_objetives){
+
+        let button = document.getElementById('buttonProgressBar'+i)
+        let progress_container = document.getElementsByClassName("progress-bar")[i];
+        let progress_done = document.getElementById("progress-done"+i);
+        let img_container = document.getElementById("img-container"+i);
+        let goal_container = document.getElementById("section"+i);
+
+        button.addEventListener('click',function(){
+            console.log(obj.current_day)
+            progressBar(obj.current_day,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
+        })
+        i++
+    }
 }
 
 
@@ -234,6 +253,16 @@ function printObjetivesLS(array){
 //     }
    
 // }
+function getObjetivesLS(){
+    if(localStorage.getItem('array_objetives')){
+        let array = JSON.parse(localStorage.getItem('array_objetives'))
+        array_objetives = array;
+        printObjetivesLS(array)
+        addProgressBar()
+    }
+}
+
+
 
 function newObjetive(){
     objetive_form_container.style.display = "grid";
@@ -245,19 +274,8 @@ new_objetive_button.addEventListener("click",()=>newObjetive())
 
 
 
-
-function getObjetivesLS(){
-    if(localStorage.getItem('array_objetives')){
-        let array = JSON.parse(localStorage.getItem('array_objetives'))
-        array_objetives = array;
-        printObjetivesLS(array)
-    }
-}
-
-
 getObjetivesLS()
 
 
-// array_objetives me come los huveos desde abajooooo
 
 
