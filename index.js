@@ -182,14 +182,19 @@ function printObjetivesLS(array){
         let obj_template = `
                 <section id="section${i}" class="section">
                 <div class="glassmorphism-effect img-container">     
-                <img src="${obj.icon}" id="img-container${i}"/>
+                    <img src="${obj.icon}" id="img-container${i}"/>
                 </div>
-                <div id="buttonProgressBar${i}">
-                <p class="little-p">${obj.title}</p>
-                <div class="progress-bar">
-                <div id="progress-done${i}" class="progress-done"></div>
-                </div>
-                </div> `
+                <div class="bar-container">
+                    <div id="buttonProgressBar${i}">
+                        <p class="little-p">${obj.title}</p>
+                        <div class="progress-bar">
+                            <div id="progress-done${i}" class="progress-done"></div>
+                        </div>
+                    </div> 
+                    <div>
+                    <img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar" id="delete-objetive${i}"/>
+                    </div>
+                </div>`
 
                 const objetive = document.createElement('div')
                 objetive.innerHTML = obj_template;
@@ -205,11 +210,14 @@ function addProgressBar(){
     let i = 0
     for (let obj of array_objetives){
 
-        let button = document.getElementById('buttonProgressBar'+i)
+        let button = document.getElementById('buttonProgressBar'+i);
         let progress_container = document.getElementsByClassName("progress-bar")[i];
         let progress_done = document.getElementById("progress-done"+i);
         let img_container = document.getElementById("img-container"+i);
         let goal_container = document.getElementById("section"+i);
+
+        let delete_button = document.getElementById("delete-objetive"+i);
+
 
             progress_container.style.width = obj.time * 5 + "px";
             progress_done.style.width = obj.pixels + "px";
@@ -226,6 +234,24 @@ function addProgressBar(){
                 progressBar(obj,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
             })
 
+            delete_button.addEventListener('click',function(e){
+                swal({
+                    title: "¿Estás seguro que deseas eliminar este objetivo?",
+                    text: "Una vez eliminado, no podrás recuperarlo, y perderás todo el progreso.",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Acepto"],
+                    dangerMode: true,
+                  })
+                  .then((willDelete) => {
+                    if (willDelete) {
+                      swal("¡El objetivo ha sido eliminado!", {icon: "success"});
+                        
+                      goal_container.style.display = "none"
+                      array_objetives.pop(obj)
+                      localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
+                    } 
+                  });
+            })
 
         i++
     }

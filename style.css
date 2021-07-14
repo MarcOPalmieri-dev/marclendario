@@ -93,14 +93,23 @@ body {
 }
 
 /* Porgress bar container */
-.goals div:last-child {
-    display: flex;
-    flex-direction: column;
-}
-
 .goals img {
     width: 30px;
 }
+
+
+.bar-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bar-container img{
+    margin-left: 15px;
+}
+
 
 /* Porcentage bar styles */
 .progress-bar{
