@@ -105,12 +105,12 @@ const now = moment();
 
 function progressBar(obj,time,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
     
-    if(time >=160){
+    if(time >=90){
         progress_container.style.width = time * 1 + "px";
         pixels+=1;
     }else{
-        progress_container.style.width = time * 3 + "px";
-        pixels+=3;
+        progress_container.style.width = time * 5 + "px";
+        pixels+=5;
     }
     
         progress_done.style.width = pixels + "px";
@@ -223,11 +223,11 @@ function addProgressBar(){
 
         let delete_button = document.getElementById("delete-objetive"+i);
 
-            if(obj.time >=160){
+            if(obj.time >=90){
                 progress_container.style.width = obj.time * 1 + "px";
 
             }else{
-                progress_container.style.width = obj.time * 3 + "px";
+                progress_container.style.width = obj.time * 5 + "px";
             }
 
             progress_done.style.width = obj.pixels + "px";
