@@ -105,9 +105,14 @@ const now = moment();
 
 function progressBar(obj,time,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
     
-    progress_container.style.width = time * 5 + "px";
+    if(time >=160){
+        progress_container.style.width = time * 1 + "px";
+        pixels+=1;
+    }else{
+        progress_container.style.width = time * 3 + "px";
+        pixels+=3;
+    }
     
-        pixels+=5;
         progress_done.style.width = pixels + "px";
         day_completed++;
         progress_done.innerHTML = day_completed + "/" + time + " Días";
@@ -218,8 +223,13 @@ function addProgressBar(){
 
         let delete_button = document.getElementById("delete-objetive"+i);
 
+            if(obj.time >=160){
+                progress_container.style.width = obj.time * 1 + "px";
 
-            progress_container.style.width = obj.time * 5 + "px";
+            }else{
+                progress_container.style.width = obj.time * 3 + "px";
+            }
+
             progress_done.style.width = obj.pixels + "px";
             progress_done.innerHTML = obj.day_completed + "/" + obj.time + " Días";
 
@@ -228,13 +238,13 @@ function addProgressBar(){
                 progress_container.style.display = "none";
             }
 
-            
+
             button.addEventListener('click',function(){
                 
                 progressBar(obj,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
             })
 
-            delete_button.addEventListener('click',function(e){
+            delete_button.addEventListener('click',function(){
                 swal({
                     title: "¿Estás seguro que deseas eliminar este objetivo?",
                     text: "Una vez eliminado, no podrás recuperarlo, y perderás todo el progreso.",
