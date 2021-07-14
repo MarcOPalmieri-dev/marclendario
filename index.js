@@ -105,7 +105,7 @@ const now = moment();
 
 function progressBar(obj,time,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
     
-    if(time >90){
+    if(time >40){
         progress_container.style.width = time * 1 + "px";
         pixels+=1;
     }else{
@@ -224,7 +224,7 @@ function addProgressBar(){
         let delete_button = document.getElementById("delete-objetive"+i);
 
             // making a conditional to avoid breaking the design with the bar.
-            if(obj.time >90){
+            if(obj.time >40){
                 progress_container.style.width = obj.time * 1 + "px";
 
             }else{
