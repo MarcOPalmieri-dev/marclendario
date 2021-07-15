@@ -143,6 +143,8 @@ function saveData(){
 
 function printObjetivesLS(array){
     const section = document.querySelector(".goals")
+    let fragment = document.createDocumentFragment()
+
     let i = 0
     for (let obj of array) {
 
@@ -165,10 +167,11 @@ function printObjetivesLS(array){
 
                 const objetive = document.createElement('div')
                 objetive.innerHTML = obj_template;
-                section.append(objetive)
+                fragment.append(objetive);
+                
                 i++
         }
-
+        section.append(fragment)
 }
 
 
@@ -184,6 +187,8 @@ function addProgressBar(){
         let goal_container = document.getElementById("section"+i);
 
         let delete_button = document.getElementById("delete-objetive"+i);
+
+        // charging progress bar properties when printing 
 
             // making a conditional to avoid breaking the design with the bar.
             if(obj.time >40){
@@ -201,11 +206,13 @@ function addProgressBar(){
                 progress_container.style.display = "none";
             }
 
-
+            
+            // adding events to progress-bar and to delete-objetive
             button.addEventListener('click',function(){
                 
                 progressBar(obj,obj.time,obj.pixels,obj.day_completed,progress_done,img_container,goal_container,progress_container)
             })
+
 
             delete_button.addEventListener('click',function(){
                 swal({
@@ -294,7 +301,7 @@ if(array_objetives.length > 0){
           });
     })
 
-}else{
+} else{
     delete_all_objetives_button.style.display = "none";
 }
 
