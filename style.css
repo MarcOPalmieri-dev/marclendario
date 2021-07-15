@@ -38,7 +38,22 @@ body {
     padding: 24px;
 }
 
+
+
 /* Objetive title styles */
+#objetive-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#objetive-title > img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+
 .title p:first-child {
     font-size: 2.8rem;
     font-weight: 600; 

@@ -1,19 +1,5 @@
 
 
-// Adding month to the front
-// const name_of_month = now.format("MMMM");
-// const month_container = document.getElementById("month");
-// const month_text = document.createElement("p");
-// month_text.innerHTML = name_of_month;
-// month_container.append(month_text);
-
-// adding values to progress bar
-// let pixels = 0;
-// let days = month_days * 2;
-// let day_comlpleted = 0;
-// let current_day = now.format('D');
-// let next_day = (parseInt(now.format('D'))+1);
-
 
 
 // Metodo para las fechas:
@@ -23,8 +9,10 @@
 
 
 
-
+// new objetive
 const new_objetive_button = document.getElementById("new_objetives")
+
+const delete_all_objetives_button = document.getElementById("delete-all-objetives")
 
 // form ids
 const objetive_form_container = document.getElementsByClassName("popup_container")[0];
@@ -72,33 +60,7 @@ function transformToUrl(value){
 }
 
 
-// const buttonProgressBar = document.getElementById("buttonProgressBar");
 
-// const progress = document.querySelector("#progress-done");
-// const img_container = document.getElementById("img-container");
-// const goals_div = document.getElementsByClassName("goals")
-// const goal_container = document.getElementById("section");
-
-// const month_days = (now.daysInMonth());
-
-
-// let pixels = 0;
-// let days = month_days * 2;
-// let day_comlpleted = 0;
-// let current_day = now.format('D');
-// console.log(current_day);
-
-
-// crear metodo para crear los objetivos.
-// 1 idea: el div contenedor cambie si el mes cambia, eliminando todos los objetivos.
-// 2 idea: preguntar cuanto durara el objetivo, y modificar el (month_days) del metodo incressPorcentage
-
-// 3 idea: se le aplica una duracion al objetivo, y si ese tiempo se pasa, que se borre.
-// function change_of_month{
-//     if(first_day){
-
-//     }
-// }
 
 const now = moment();
 
@@ -254,12 +216,13 @@ function addProgressBar(){
                     dangerMode: true,
                   })
                   .then((willDelete) => {
+
+                    goal_container.style.display = "none"
+                    array_objetives.pop(obj)
+                    localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
+                    
                     if (willDelete) {
                       swal("¡El objetivo ha sido eliminado!", {icon: "success"});
-                        
-                      goal_container.style.display = "none"
-                      array_objetives.pop(obj)
-                      localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
                     } 
                   });
             })
@@ -300,12 +263,39 @@ function newObjetive(){
     save_objetive_button.addEventListener('click',()=>saveData())
 }
 
-new_objetive_button.addEventListener("click",()=>newObjetive())
 
 
+// executing functions
 
 getObjetivesLS()
 
+new_objetive_button.addEventListener("click",()=>newObjetive())
 
+
+if(array_objetives.length > 0){
+    
+    delete_all_objetives_button.addEventListener("click",()=>{
+        swal({
+            title: "¿Estás seguro que deseas eliminar todos los objetivos?",
+            text: "Una vez eliminado, no podrás recuperarlo, y perderás todo el progreso.",
+            icon: "warning",
+            buttons: ["Cancelar", "Acepto"],
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+    
+              array_objetives = []
+              localStorage.clear();
+              location.reload();
+    
+            if (willDelete) {
+              swal("¡Los objetivos han sido eliminados!", {icon: "success"});
+            } 
+          });
+    })
+
+}else{
+    delete_all_objetives_button.style.display = "none";
+}
 
 
