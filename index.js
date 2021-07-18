@@ -1,22 +1,12 @@
 
-
-
-
-// Metodo para las fechas:
-
-// crear un objeto (puede ser una clase)que contenga el div sema, y ese objeto contiene a los divs de los dias de esa semana.
-// ese objeto sera guardado en un array de objetos.
-
-
-
 // new objetive
 const new_objetive_button = document.getElementById("new_objetives")
 
 const delete_all_objetives_button = document.getElementById("delete-all-objetives")
 
 // form ids
-const objetive_form_container = document.getElementsByClassName("popup_container")[0];
-const close_form = document.getElementById("close_button");
+const objetive_form_container = document.getElementById("objetive-container");
+const close_button = document.getElementById("close_button");
 const save_objetive_button = document.getElementById("save_objetive");
 
 // inputs to get data from Objetive form
@@ -30,7 +20,7 @@ let array_objetives = [];
 
 
 function closeForm(){
-    objetive_form_container.style.display = "none"; 
+    objetive_form_container.classList.remove("active"); 
     input_title.value = "";
     input_time.value = "";
 }
@@ -239,20 +229,7 @@ function addProgressBar(){
 }
 
 
-// function newObjetive(array=0){
-//     console.log(array)
-//     objetive_form_container.style.display = "grid";
-//     close_button.addEventListener('click',() =>closeForm());
-//     if(array.length === 0){
-        
-//         save_objetive_button.addEventListener('click',()=>saveData())
-//     }else{
 
-//         printNewObjetives(array)
-//         closeForm()
-//     }
-   
-// }
 function getObjetivesLS(){
     if(localStorage.getItem('array_objetives')){
         let array = JSON.parse(localStorage.getItem('array_objetives'))
@@ -265,7 +242,7 @@ function getObjetivesLS(){
 
 
 function newObjetive(){
-    objetive_form_container.style.display = "grid";
+    objetive_form_container.classList.add('active');
     close_button.addEventListener('click',() =>closeForm());
     save_objetive_button.addEventListener('click',()=>saveData())
 }

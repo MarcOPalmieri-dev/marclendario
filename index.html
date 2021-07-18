@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"  media="(max-width:1320px)" href="tablet.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap">
+
+    <!-- Core Stylesheet -->
+
+<link rel="stylesheet" href="event-calendar-evo\event-calendar-evo\evo-calendar\css\evo-calendar.css" />
+
+<!-- Optional Themes -->
+
+<!-- <link rel="stylesheet" href="event-calendar-evo\event-calendar-evo\evo-calendar\css\evo-calendar.midnight-blue.css" />
+
+<link rel="stylesheet" href="event-calendar-evo\event-calendar-evo\evo-calendar\css\evo-calendar.orange-coral.css" />
+
+<link rel="stylesheet" href="event-calendar-evo\event-calendar-evo\evo-calendar\css\evo-calendar.royal-navy.css" /> -->
+
+<!-- JavaScript -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="event-calendar-evo\event-calendar-evo\evo-calendar\js\evo-calendar.js"></script>
+
 </head>
 <body>
     <main class="container glassmorphism-effect padding-box">
@@ -27,7 +45,7 @@
                 
             </section>
 
-            <button id="new_objetives" class="padding-box">
+            <button id="new_objetives" class="new-button">
                 <img src="mas.png" alt="Nuevo Objetivo" >
                 </button>
         </section>
@@ -42,107 +60,17 @@
                     <!-- esto irá modificado x javascript -->
                     
             </div>
-              <div>
-                <div>
-                    <p class="little-p">Lunes</p>
-                    <!-- esto ira modificado por javascript. Se agregará un botón para añadir tareas -->
-                    <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p class="little-p">Martes</p>
-                    <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p class="little-p">Miércoles</p>
-                    <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p class="little-p">Jueves</p>
-                    <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p class="little-p">Viernes</p>
-                    <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p class="little-p">Sábado</p>
-                     <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p class="little-p">Domingo</p>
-                     <div class="card">
-                        <div class="glassmorphism-effect">
-                            <p>Ejercicio</p>
-                        </div>
-                        <div class="glassmorphism-effect">
-                            <p>7:00am</p>
-                            <p>Cardio</p>
-                                <!-- sera agregado por javascript -->
-                        </div>
-                    </div>
-                </div> 
-                </div> 
-            
+            <div id="calendar"></div>
+            <button id="new_event" class="new-button">
+                <img src="mas.png" alt="Agregar evento" >
+                </button>
+              
         </section>
        
     </main>
 
-    <section class="popup_container">
-        <div id="objetive_form">
+    <section class="popup_container" id="objetive-container">
+        <div class="form-container">
             <div>
                 <h3>Nuevo Objetivo</h3>
                 <span id="close_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
@@ -165,15 +93,81 @@
                 <label for="time_to_complete">Elige el tiempo, en días, para completar el objetivo.</label>
                 <input type="number" id="time" name="time" min="1" max="366"  required> 
     
-                <button id="save_objetive">Guardar</button>
+                <button id="save_objetive" class="save-button">Guardar</button>
             </div>
         </div>
     </section>
   
+
+    <section class="popup_container" id="event-container">
+        <div id="event-form">
+            <div>
+                <h3>Nuevo Evento</h3>
+                <span id="close_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
+            </div>
+    
+            <div class="form">
+                <label for="title">Nombre del Evento</label>
+                <input type="text" >
+    
+                <label for="tag">Elige la etiqueta, por ejemplo, "vacaciones", "tareas", etc.</label>
+                <input type="text" id="tag" name="tag">
+
+                <label for="color">Elige el color del evento.</label>
+                <input type="color" name="color" id="color">
+
+                <section >
+                    <p>¿Cuántos días va a ocupar el evento?</p>
+
+                    <div class="radio-container">
+
+                        <input type="radio" id="one-day" name="days" value="one-day">
+                        <label for="one-day">Un solo día</label>
+                       
+                        <input type="radio" id="multiple-days" name="days" value="multiple-days">
+                        <label for="multiple-days">Multiples días</label>
+
+                    </div>
+        
+                    <!-- div for one-day -->
+                        <div class="radio-container one-day none">
+                            <input type="radio" id="select-day" name="one-day" value="select-day">
+                            <label for="select-day">Día seleccionado</label>
+    
+                            <input type="radio" id="custom-day" name="one-day" value="custom-day">
+                            <label for="custom-day">Elegir fecha:</label>
+                        </div>
+    
+                        <!-- div for custom day -->
+                                <div class="radio-container custom-day none">
+                                    <label for="custom-day">Fecha</label>
+                                    <input type="date" id="custom-day" name="custom-day">
+                                </div>
+    
+    
+                    <!-- div for multiple days-->
+                        <div class="multiple-days none">
+                            <div>
+                                <label for="first-day">Desde el día:</label>
+                                <input type="date" id="first-day" name="range">
+                            </div>
+    
+                            <div>
+                                <label for="last-day">Hata el día:</label>
+                                <input type="date" id="last-day" name="range">
+                            </div>
+                        </div>
+                </section>
+
+                    <button id="save_event" class="save-button">Guardar</button>
+            </div>
+        </div>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/es.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 <script src="index.js"></script>
+<script src="calendar.js"></script>
 
 </html>
