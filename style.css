@@ -198,7 +198,7 @@ body {
 #event-form > div{
     margin-top: 5px;
     margin-bottom: 15px;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -294,6 +294,12 @@ body {
     margin-right: 10px;
 }
 
+label[for="everyYear"]{
+    margin-top: 10px;
+}
+#everyYear{
+    width: 40%;
+}
 
 .none{
     display: none !important;

@@ -344,7 +344,7 @@ tr.calendar-body .calendar-day .day[disabled] {
     width: 2px;
     height: 100%;
     transform: translate(29px, 30px);
-    background-color: #eaeaea;
+    background-color: #e2bcee;
     z-index: -1;
 }
 .event-container:last-child.event-container::before {

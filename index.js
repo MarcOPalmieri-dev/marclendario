@@ -102,7 +102,7 @@ function createPushObject(title,icon,time){
     array_objetives.push(obj);
     localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
     swal({title: "¡Perfecto!",
-    text: "El objetivo se ha guardado con éxito!",
+    text: "¡El objetivo se ha guardado con éxito!",
     icon: "success",
     buttons: false})
     setTimeout(()=>location.reload(),2000)

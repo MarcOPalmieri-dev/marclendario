@@ -4,10 +4,10 @@ $(document).ready(function() {
 
     calendar.evoCalendar({
         theme: 'default',
-        format:'mm/dd/yyyy',
+        format:'yyyy/mm/dd',
         titleFormat:'MM yyyy',
         eventHeaderFormat:'MM d, yyyy',
-        'firstDayOfWeek': 0,
+        'firstDayOfWeek': 1,
         'todayHighlight': true,
         'sidebarDisplayDefault': false,
         language:'es',
@@ -24,24 +24,9 @@ $(document).ready(function() {
 
     })
 
+    let calendar_events = []
 
-    calendar.evoCalendar('addCalendarEvent', [
-     {
-          id: 'kNybja6',
-          name: 'Mom\'s Birthday',
-          date: new Date(),
-            type: '',
-          everyYear: true // optional
-     },
-     {
-          id: 'asDf87L',
-          name: 'Graduation Day!',
-          date: 'July 21, 2021',
-            type: '',
-            color:"orange"
-          
-     }
-    ]);
+    
 
     const new_event_button = document.getElementById('new_event')
     const event_form_container = document.getElementById('event-container')
@@ -51,6 +36,8 @@ $(document).ready(function() {
 
     // event form ids
     const event_name_input = document.getElementById('event_name')
+    const event_description_input = document.getElementById('event_description')
+
     const color_input = document.getElementById('color')
 
     const day_selected_input = document.getElementById('select-day')
@@ -62,6 +49,7 @@ $(document).ready(function() {
     const first_day_input = document.getElementById('first-day')
     const last_day_input = document.getElementById('last-day')
 
+    const everyYear_input = document.getElementById('everyYear')
     // radio buttons and div-classes 
     let days_radio = $('input[name=days]:radio')
         let one_day = $('.one-day')
@@ -70,6 +58,7 @@ $(document).ready(function() {
     let custom_day_class = $('.custom-day')
         
     
+
     // crear formulario, y metodos para crear los eventos.
     // method to select one day or multiple days
     days_radio.change(function(e) {
@@ -114,28 +103,72 @@ $(document).ready(function() {
         return result;
     }
 
+    function ParseBool(value) {
+        if(value === "true"){
+            return true;
+        }else if(value === "false"){
+            return false;
+        }
+    }
 
+    function createEventObject(name,description,date,color,everyYear,badge){
+        let obj = {
+            id:makeId(),
+            name,
+            badge,
+            description,
+            date,
+            type: makeId(),
+            color,
+            everyYear
+        };
+
+        closeForm()
+        calendar_events.push(obj);
+        localStorage.setItem("calendar_events",JSON.stringify(calendar_events));
+
+        swal({title: "¡Perfecto!",
+        text: "¡El evento se ha guardado con éxito!",
+        icon: "success",
+        buttons: false})
+        setTimeout(()=>location.reload(),2000)
+        
+    }
 
     function saveEvent(){
         let event_name = event_name_input.value
+        let event_description = event_description_input.value
         let color = color_input.value  
         let day_selected = day_selected_input.value
-        let custom_day = custom_day_input.value
-        let first_day = first_day_input.value
-        let last_day = last_day_input.value
+        let custom_day = (custom_day_input.value).replace(/-/g,"/")
+        let first_day = (first_day_input.value).replace(/-/g,"/")
+        let last_day = (last_day_input.value).replace(/-/g,"/")
+        let everyYear = ParseBool(everyYear_input.value)
+       
 
         if(event_name && !event_name.includes('<') && !event_name.includes('>')){
 
             if(multiple_days_input.checked && first_day != 0 && last_day != 0){
-                console.log("dos dias")
-                console.log("last day: " + last_day)
-                console.log("last day: " + last_day)
+                
+                if(first_day < last_day){
+                    let range = [first_day, last_day]
+                    let from = first_day.slice(5)
+                    let since = last_day.slice(5)
+                    let badge = from + ' - ' + since
+                    
+                    createEventObject(event_name,event_description,range,color,everyYear,badge)
+                }else{
+                    swal("Vaya...", "Modifica el día de finalización del evento, para que sea posterior al día inicial.", "warning")
+                }
     
             } else if(custom_radio.checked && custom_day != 0){
-                console.log("custom_day: " + custom_day)
+
+                createEventObject(event_name,event_description,custom_day,color,everyYear)
     
             }else if(day_selected_input.checked && day_selected == "on"){
-                console.log("day_selected: " + day_selected)
+
+                let active_date = calendar.evoCalendar('getActiveDate');
+                createEventObject(event_name,event_description,active_date,color,everyYear)
     
             }else{
                 swal("Vaya...", "Debes elegir alguna opción!", "warning")
@@ -156,5 +189,15 @@ $(document).ready(function() {
         save_event_button.addEventListener('click', ()=>saveEvent());
     }
 
+
+    function getEvents(){
+        if(localStorage.getItem('calendar_events')){
+            calendar_events = JSON.parse(localStorage.getItem('calendar_events'))
+            calendar.evoCalendar('addCalendarEvent', calendar_events)
+        }
+    }
+
     new_event_button.addEventListener('click', () => newEvent())
+    getEvents()
+
 })

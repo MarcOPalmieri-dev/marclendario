@@ -103,15 +103,16 @@
         <div id="event-form">
             <div>
                 <h3>Nuevo Evento</h3>
-                <span id="close_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
+                <span id="close-event_button"><img src="https://img.icons8.com/nolan/64/multiply.png" alt="Cerrar"/></span>
             </div>
     
             <div class="form">
-                <label for="title">Nombre del Evento</label>
-                <input type="text" >
-    
-                <label for="tag">Elige la etiqueta, por ejemplo, "vacaciones", "tareas", etc.</label>
-                <input type="text" id="tag" name="tag">
+                <label for="event_name">Nombre del Evento</label>
+                <input type="text" id="event_name" >
+
+                <label for="event_description">Descripción del Evento (opcional)</label>
+                <input type="text" id="event_description" >
+
 
                 <label for="color">Elige el color del evento.</label>
                 <input type="color" name="color" id="color">
@@ -131,11 +132,11 @@
         
                     <!-- div for one-day -->
                         <div class="radio-container one-day none">
-                            <input type="radio" id="select-day" name="one-day" value="select-day">
+                            <input type="radio" id="select-day" name="one-day">
                             <label for="select-day">Día seleccionado</label>
     
-                            <input type="radio" id="custom-day" name="one-day" value="custom-day">
-                            <label for="custom-day">Elegir fecha:</label>
+                            <input type="radio" id="custom-radio" name="one-day" value="custom-day">
+                            <label for="custom-radio">Elegir fecha</label>
                         </div>
     
                         <!-- div for custom day -->
@@ -153,11 +154,17 @@
                             </div>
     
                             <div>
-                                <label for="last-day">Hata el día:</label>
+                                <label for="last-day">Hasta el día:</label>
                                 <input type="date" id="last-day" name="range">
                             </div>
                         </div>
                 </section>
+
+                <label for="everyYear">¿Repetir evento todos los años?</label>
+                <select name="everyYear" id="everyYear">
+                    <option value="false">No</option>
+                    <option value="true">Sí</option>
+                </select>
 
                     <button id="save_event" class="save-button">Guardar</button>
             </div>
