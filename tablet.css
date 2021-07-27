@@ -22,21 +22,5 @@
 }
 
 
-/* .main-content > div:nth-child(2) {
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(7, 1fr);
-   
-} */
 
- .card {
-    display: inline-grid; 
-    grid-template-columns: repeat(3, 1fr);
-    height: 100px;
-    position: relative;
-    min-width: 120px;
-    max-width: 200px;
-    margin: 20px 10px;
-}  
 
