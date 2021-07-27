@@ -38,7 +38,14 @@ $(document).ready(function() {
     const event_name_input = document.getElementById('event_name')
     const event_description_input = document.getElementById('event_description')
 
-    const color_input = document.getElementById('color')
+    // color radiobutton ids 
+    const red = document.getElementById('red')
+    const green = document.getElementById('green')
+    const yellow = document.getElementById('yellow')
+    const blue = document.getElementById('blue')
+    const pink = document.getElementById('pink')
+    const orange = document.getElementById('orange')
+
 
     const day_selected_input = document.getElementById('select-day')
 
@@ -59,7 +66,7 @@ $(document).ready(function() {
         
     
 
-    // crear formulario, y metodos para crear los eventos.
+
     // method to select one day or multiple days
     days_radio.change(function(e) {
         let value = e.target.value
@@ -91,6 +98,25 @@ $(document).ready(function() {
         }
     })
 
+
+// transform color radiobutton to color 
+function transformToColor(){
+
+    if(red.checked){return "#ff6961"}
+
+    if(green.checked){return "#77dd77"}
+
+    if(yellow.checked){return "#fdfd96"}
+
+    if(blue.checked){return "#84b6f4"}
+
+    if(pink.checked){return "#bc98f3"}
+
+    if(orange.checked){return "#f1cd94"}
+}
+            
+  
+
 // generate id
     function makeId(){
         let result = '';
@@ -103,12 +129,9 @@ $(document).ready(function() {
         return result;
     }
 
+
     function ParseBool(value) {
-        if(value === "true"){
-            return true;
-        }else if(value === "false"){
-            return false;
-        }
+        return value === "true"
     }
 
     function createEventObject(name,description,date,color,everyYear,badge){
@@ -138,7 +161,7 @@ $(document).ready(function() {
     function saveEvent(){
         let event_name = event_name_input.value
         let event_description = event_description_input.value
-        let color = color_input.value  
+        let color = transformToColor()  
         let day_selected = day_selected_input.value
         let custom_day = (custom_day_input.value).replace(/-/g,"/")
         let first_day = (first_day_input.value).replace(/-/g,"/")
