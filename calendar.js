@@ -202,28 +202,8 @@ function transformToColor(){
         }
     }
 
-    function closeForm(){
-        event_form_container.classList.remove("active");
-    }
-
-    function newEvent() {
-        event_form_container.classList.add('active');
-        close_event_button.addEventListener('click', ()=>closeForm());
-        save_event_button.addEventListener('click', ()=>saveEvent());
-    }
-
-
-    function getEvents(){
-        if(localStorage.getItem('calendar_events')){
-            calendar_events = JSON.parse(localStorage.getItem('calendar_events'))
-            calendar.evoCalendar('addCalendarEvent', calendar_events)
-        }
-    }
-
-    new_event_button.addEventListener('click', () => newEvent())
-    getEvents()
-
-// html elements to delete events.
+    // Delete Events
+    // html elements to delete events.
     let calendar_events_container = document.getElementsByClassName('calendar-events')[0]
     // creating close-button
     let close_button = document.createElement('img')
@@ -274,5 +254,29 @@ function transformToColor(){
         }    
         
     })
+
+
+    function closeForm(){
+        event_form_container.classList.remove("active");
+    }
+
+    function newEvent() {
+        event_form_container.classList.add('active');
+        close_event_button.addEventListener('click', ()=>closeForm());
+        save_event_button.addEventListener('click', ()=>saveEvent());
+    }
+
+
+    function getEvents(){
+        if(localStorage.getItem('calendar_events')){
+            calendar_events = JSON.parse(localStorage.getItem('calendar_events'))
+            calendar.evoCalendar('addCalendarEvent', calendar_events)
+        }
+    }
+
+    new_event_button.addEventListener('click', () => newEvent())
+    getEvents()
+
+
  
 })
