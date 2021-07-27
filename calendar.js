@@ -200,4 +200,56 @@ $(document).ready(function() {
     new_event_button.addEventListener('click', () => newEvent())
     getEvents()
 
+// html elements to delete events.
+    let calendar_events_container = document.getElementsByClassName('calendar-events')[0]
+    // creating close-button
+    let close_button = document.createElement('img')
+    close_button.src = "https://img.icons8.com/nolan/64/multiply.png"
+    close_button.title = "Borrar Evento"
+    calendar_events_container.append(close_button)
+
+    
+    close_button.addEventListener('click',()=>{
+        let active_events = calendar.evoCalendar('getActiveEvents');
+
+        if(active_events.length != 0){
+            swal("Alerta!", "Preciona el evento que desees eliminar. Si el evento seleccionado es de múltiples días, se borrará en todos ellos.", "warning"); 
+
+            // getting the event list
+            let event_container = $('.event-container')
+            let array = [...event_container] 
+
+            array.forEach(element => {
+                element.addEventListener('click',(e)=>{
+                    swal({
+                        title: "¿Estás seguro que deseas eliminar este evento?",
+                        text: "Una vez eliminado, no podrás recuperarlo.",
+                        icon: "warning",
+                        buttons: ["Cancelar", "Acepto"],
+                        dangerMode: true,
+                      })
+
+                      .then((willDelete) => {
+                        //   getting the id to use it in the removeCalendarEvent
+                        let id = e.path[2].dataset.eventIndex;
+                        calendar.evoCalendar('removeCalendarEvent', id);
+
+                        // getting index of the element removed from the calendar_events array, to save it into localStorage
+                        let index = calendar_events.map(e => e.id).indexOf(id);
+                        calendar_events.splice(index, 1);
+                        localStorage.setItem("calendar_events",JSON.stringify(calendar_events));
+
+                        if (willDelete) {
+                            swal("¡El evento ha sido eliminado!", {icon: "success"});
+                      } 
+                    });
+                })
+            });
+
+        }else{
+            swal("Vaya!", "No hay ningún evento para borar en esta fecha.", "info"); 
+        }    
+        
+    })
+ 
 })

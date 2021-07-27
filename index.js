@@ -269,7 +269,7 @@ if(array_objetives.length > 0){
           .then((willDelete) => {
     
               array_objetives = []
-              localStorage.clear();
+              localStorage.removeItem('array_objetives');
               location.reload();
     
             if (willDelete) {
