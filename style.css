@@ -437,4 +437,8 @@ footer p{
 footer a{
     text-decoration: none;
     color: #520855;
+    transition: all .5s ease
+}
+footer a:hover{
+    text-decoration: underline;
 }

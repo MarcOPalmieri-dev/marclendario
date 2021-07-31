@@ -30,7 +30,10 @@ footer{
 footer p{
     font-size:1rem;
     margin-top: 10px;
-    margin-bottom:5px
+    
+}
+footer p:last-child{
+    margin-bottom: 5px;
 }
 
 

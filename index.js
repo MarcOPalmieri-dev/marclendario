@@ -51,10 +51,6 @@ function transformToUrl(value){
 
 
 
-
-const now = moment();
-
-
 function progressBar(obj,time,pixels,day_completed,progress_done,img_container,goal_container,progress_container){
     
     if(time >40){
