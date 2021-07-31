@@ -21,6 +21,16 @@
     grid-row: 2;
 }
 
+footer{
+    
+    flex-direction: column;
+    text-align: center;
+}
 
+footer p{
+    font-size:1rem;
+    margin-top: 10px;
+    margin-bottom:5px
+}
 
 
