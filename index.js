@@ -90,13 +90,15 @@ function progressBar(obj,time,pixels,day_completed,progress_done,img_container,g
 
 
 function createPushObject(title,icon,time){
+    
     let obj = {
         title,
         icon,
         time,
         day_completed:0,
         pixels: 0, 
-        finished:false  
+        finished:false,
+        id:"delete-objetive"+array_objetives.length  
     }
     
     array_objetives.push(obj);
@@ -204,7 +206,7 @@ function addProgressBar(){
             })
 
 
-            delete_button.addEventListener('click',function(){
+            delete_button.addEventListener('click',function(e){
                 swal({
                     title: "¿Estás seguro que deseas eliminar este objetivo?",
                     text: "Una vez eliminado, no podrás recuperarlo, y perderás todo el progreso.",
@@ -213,9 +215,10 @@ function addProgressBar(){
                     dangerMode: true,
                   })
                   .then((willDelete) => {
-
                     goal_container.style.display = "none"
-                    array_objetives.pop(obj)
+                    let id = e.target.id
+                    let index = array_objetives.map(e => e.id).indexOf(id);
+                    array_objetives.splice(index, 1);
                     localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
                     
                     if (willDelete) {
