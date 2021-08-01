@@ -211,15 +211,15 @@ function addProgressBar(){
                     dangerMode: true,
                   })
                   .then((willDelete) => {
-                    goal_container.style.display = "none"
-                    let id = e.target.id
-                    let index = array_objetives.map(e => e.id).indexOf(id);
-                    array_objetives.splice(index, 1);
-                    localStorage.setItem("array_objetives",JSON.stringify(array_objetives));
-                    
                     if (willDelete) {
+                        
+                        goal_container.style.display = "none"
+                        let id = e.target.id
+                        let index = array_objetives.map(e => e.id).indexOf(id);
+                        array_objetives.splice(index, 1);
+                        localStorage.setItem("array_objetives",JSON.stringify(array_objetives)); 
                       swal("¡El objetivo ha sido eliminado!", {icon: "success"});
-                    } 
+                    }
                   });
             })
 
@@ -266,12 +266,10 @@ if(array_objetives.length > 0){
             dangerMode: true,
           })
           .then((willDelete) => {
-    
+            if (willDelete) {
               array_objetives = []
               localStorage.removeItem('array_objetives');
               location.reload();
-    
-            if (willDelete) {
               swal("¡Los objetivos han sido eliminados!", {icon: "success"});
             } 
           });

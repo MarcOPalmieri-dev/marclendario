@@ -233,6 +233,7 @@ function transformToColor(){
                       })
 
                       .then((willDelete) => {
+                        if (willDelete) {
                         //   getting the id to use it in the removeCalendarEvent
                         let id = e.path[2].dataset.eventIndex;
                         calendar.evoCalendar('removeCalendarEvent', id);
@@ -242,8 +243,8 @@ function transformToColor(){
                         calendar_events.splice(index, 1);
                         localStorage.setItem("calendar_events",JSON.stringify(calendar_events));
 
-                        if (willDelete) {
-                            swal("¡El evento ha sido eliminado!", {icon: "success"});
+                        
+                         swal("¡El evento ha sido eliminado!", {icon: "success"});
                       } 
                     });
                 })
